@@ -21,4 +21,6 @@ public interface FriendDAO {
     @Query("SELECT * FROM friend_list")
     LiveData<List<Friend>> getFriendList();
 
+    @Query("SELECT * FROM friend_list")
+    DataSource.Factory<Integer, Friend> getFriendListPaged();
 }

@@ -3,6 +3,9 @@ package com.learn.pagingtutorialjetpack.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 
 import com.learn.pagingtutorialjetpack.dao.FriendDAO;
 import com.learn.pagingtutorialjetpack.data.Friend;
@@ -31,5 +34,11 @@ public class DataRepository {
 
     public LiveData<List<Friend>> getFriendListRepo(){
         return friendDAO.getFriendList();
+    }
+
+    public LiveData<PagedList<Friend>> getPagedList(PagedList.Config config){
+        DataSource.Factory<Integer,Friend>factory = friendDAO.getFriendListPaged();
+        return new LivePagedListBuilder<>(factory, config)
+                .build();
     }
 }
